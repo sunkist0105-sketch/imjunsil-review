@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>임준실 대본 검토</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap">
+<style>
+html, body { margin: 0; } [hidden] { display: none !important; }
+/* 레이아웃: 편 목록 → 편 화면(왼쪽 대본 / 오른쪽 수정 칸, 폰에서는 위아래) */
+:root {
+  --bg: #F1ECE4; --surface: #FBF8F3; --line: #E4DCD0; --ink: #3A3733; --muted: #7B746B;
+  --point: #A6C483; --leaf: #56733F; --pd: #E4DCD0; --warn: #9A5B3C;
+  --font: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #24221F; --surface: #2E2B27; --line: #45403A; --ink: #EDE7DE; --muted: #A9A196;
+  --point: #A6C483; --leaf: #B9D49A; --pd: #3B3732; --warn: #E0A07E; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #24221F; --surface: #2E2B27; --line: #45403A; --ink: #EDE7DE; --muted: #A9A196;
+  --point: #A6C483; --leaf: #B9D49A; --pd: #3B3732; --warn: #E0A07E; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.7; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { font-size: 13px; letter-spacing: .06em; color: var(--muted); }
+h1 { font-size: 26px; font-weight: 700; line-height: 1.35; margin: 6px 0 4px; text-wrap: balance; }
+h2 { font-size: 22px; font-weight: 700; line-height: 1.4; margin: 0; text-wrap: balance; }
+h3 { font-size: 18px; font-weight: 600; margin: 0; }
+.bar { width: 48px; height: 4px; background: var(--point); border-radius: 2px; margin: 12px 0 18px; }
+.intro { color: var(--muted); max-width: 62ch; margin: 0 0 22px; }
+.notice { border: 1.5px solid var(--warn); color: var(--warn); border-radius: 10px; padding: 10px 14px; margin: 0 0 18px; font-size: 14px; }
+.eps { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.ep { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.ep:hover, .ep:focus-visible { border-color: var(--point); outline: none; }
+.ep .no { font-size: 13px; color: var(--muted); }
+.ep .t { font-weight: 600; font-size: 17px; margin: 4px 0 10px; text-wrap: balance; }
+.ep .s { font-size: 13px; color: var(--leaf); font-weight: 600; }
+.ep.off { opacity: .55; pointer-events: none; }
+.ep.off .s { color: var(--muted); }
+.back { display: inline-block; color: var(--muted); text-decoration: none; font-size: 14px; margin-bottom: 10px; }
+.back:hover { color: var(--ink); }
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); display: flex; gap: 6px; overflow-x: auto; padding: 10px 0; margin: 8px 0 14px; border-bottom: 1px solid var(--line); }
+.toc a { flex: none; font-size: 13px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+.toc a.has { border-color: var(--point); color: var(--leaf); font-weight: 600; }
+.sec { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 18px 20px; margin: 0 0 16px; scroll-margin-top: 64px; }
+.sec-hd { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin-bottom: 12px; }
+.kicker { font-size: 12px; font-weight: 600; background: var(--ink); color: var(--bg); border-radius: 6px; padding: 2px 8px; }
+.meta { margin-left: auto; font-size: 13px; color: var(--muted); }
+.sec-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 760px) { .sec-body { grid-template-columns: 1fr; } .meta { margin-left: 0; width: 100%; } }
+.script { min-width: 0; }
+.line { margin: 0 0 6px; padding-left: 12px; border-left: 3px solid var(--line); }
+.act { color: var(--muted); font-size: .92em; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; color: var(--leaf); border: 1.5px solid var(--point); border-radius: 6px; padding: 0 6px; margin-left: 4px; vertical-align: 2px; white-space: nowrap; }
+.pd { display: inline-block; background: var(--pd); border-radius: 6px; padding: 3px 10px; margin: 4px 0 8px; font-weight: 600; font-size: 14px; }
+.note { color: var(--muted); font-size: 13.5px; margin: 10px 0 0; }
+.key { margin: 12px 0 0; font-weight: 600; }
+.key span { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
+.chart { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.chart th { text-align: left; width: 86px; padding: 6px 0; border-top: 1px solid var(--line); vertical-align: top; font-weight: 600; }
+.chart td { padding: 6px 0; border-top: 1px solid var(--line); }
+.memo-h { font-weight: 600; margin: 12px 0 4px; font-size: 14.5px; }
+.memo, .list { margin: 0; padding-left: 20px; }
+.list li, .memo li { margin-bottom: 4px; }
+.fb { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fb label { font-size: 13px; font-weight: 600; color: var(--leaf); }
+textarea { width: 100%; min-height: 120px; resize: vertical; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+textarea:focus-visible { outline: none; border-color: var(--point); }
+.fb-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.status { font-size: 12.5px; color: var(--muted); }
+.status.ok { color: var(--leaf); }
+.status.err { color: var(--warn); }
+.done { background: var(--surface); border: 1.5px solid var(--point); border-radius: 12px; padding: 24px 20px; margin: 24px 0 0; text-align: center; }
+.done-t { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+.done-d { color: var(--muted); margin: 0 auto 16px; max-width: 46ch; }
+.save-all { font: inherit; font-size: 17px; font-weight: 700; color: var(--bg); background: var(--ink); border: 0; border-radius: 12px; padding: 14px 32px; cursor: pointer; min-width: 220px; transition: background-color .25s, transform .1s; }
+.save-all:hover { filter: brightness(1.1); }
+.save-all:active { transform: scale(.97); }
+.save-all:focus-visible { outline: 3px solid var(--point); outline-offset: 3px; }
+.save-all:disabled { cursor: default; opacity: .7; }
+.save-all.ok { background: var(--leaf); }
+.save-all.ok .lbl::before { content: "✓ "; }
+.save-all.busy .lbl::after { content: ""; display: inline-block; width: 14px; height: 14px; margin-left: 8px; vertical-align: -2px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pop { 0% { transform: scale(.94); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.saved-msg { min-height: 1.6em; margin: 12px 0 0; font-weight: 600; color: var(--leaf); }
+.saved-msg.err { color: var(--warn); }
+.saved-msg.show { animation: pop .3s ease-out; }
+@media (prefers-reduced-motion: reduce) { .save-all.busy .lbl::after, .saved-msg.show { animation: none; } }
+.choices { border: 0; margin: 4px 0 10px; padding: 0; display: grid; gap: 8px; }
+.choices legend { font-size: 13px; font-weight: 600; color: var(--leaf); margin-bottom: 6px; }
+.choice { display: flex; gap: 10px; align-items: flex-start; background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; }
+.choice:has(input:checked) { border-color: var(--point); }
+.choice input { margin-top: 6px; accent-color: var(--leaf); flex: none; }
+.choice span { min-width: 0; }
+.save { font: inherit; font-size: 14px; font-weight: 600; color: var(--bg); background: var(--ink); border: 0; border-radius: 8px; padding: 6px 16px; cursor: pointer; }
+.save:focus-visible { outline: 3px solid var(--point); outline-offset: 2px; }
+.save:disabled { opacity: .45; cursor: default; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div id="v-home">
+    <div class="brand">김세정의 임신준비실 · 대본 검토</div>
+    <div class="bar"></div>
+    <h1>원장님, 대본을 봐 주세요</h1>
+    <p class="intro">편을 누르면 막마다 대본이 나와요. 오른쪽(휴대폰에서는 아래) 칸에 고칠 부분을 적고, 다 보신 뒤 맨 아래 <b>수정사항 저장하기</b>를 눌러 주세요. 저장한 내용은 제작진에게 바로 전달돼요.</p>
+    <p class="notice" id="notice-home" hidden></p>
+    <div class="eps">
+      <a class="ep" href="#ep1"><div class="no">1주차 · 진료 기록 #001</div><div class="t">배란일에 올인한 부부, 임신 확률 높이기 | 임신 준비 3개월 차</div><div class="s" id="ep1-count">검토 전</div></a>
+      <a class="ep off" aria-disabled="true"><div class="no">2주차 · 진료 기록 #002</div><div class="t">만 35세 임신 준비</div><div class="s">준비 중</div></a>
+      <a class="ep off" aria-disabled="true"><div class="no">3주차 · 진료 기록 #003</div><div class="t">난소 나이(AMH)</div><div class="s">준비 중</div></a>
+      <a class="ep off" aria-disabled="true"><div class="no">1개월 · 난임의 마음</div><div class="t">난임 병원, 언제 가야 할까</div><div class="s">준비 중</div></a>
+    </div>
+  </div>
+
+  <div id="v-ep1" hidden>
+    <a class="back" href="#">← 편 목록</a>
+    <div class="brand">1주차 · 진료 기록 #001</div>
+    <h2>배란일에 올인한 부부, 임신 확률 높이기 | 임신 준비 3개월 차</h2>
+    <p class="notice" id="notice-ep" hidden></p>
+    <nav class="toc" aria-label="막 바로가기"><a href="#ep1" data-jump="s-chart">차트</a><a href="#ep1" data-jump="s-opening">오프닝</a><a href="#ep1" data-jump="s-n1">차트 읽기</a><a href="#ep1" data-jump="s-1act">1막</a><a href="#ep1" data-jump="s-2act">2막</a><a href="#ep1" data-jump="s-3act">3막</a><a href="#ep1" data-jump="s-4act">4막</a><a href="#ep1" data-jump="s-5act">5막</a><a href="#ep1" data-jump="s-tip">세정's 팁</a><a href="#ep1" data-jump="s-pdq">PD 질문</a><a href="#ep1" data-jump="s-check">확인 부탁</a><a href="#ep1" data-jump="s-overall">전체</a><a href="#ep1" data-jump="s-save" class="go-save">저장하기</a></nav>
+    <section class="sec" id="s-chart">
+  <header class="sec-hd"><span class="kicker">준비</span><h3>진료 기록 #001</h3><span class="meta">이해를 돕기 위한 가상 사례</span></header>
+  <div class="sec-body">
+    <div class="script"><table class="chart"><tr><th>나이</th><td>아내 만 33세 / 남편 만 35세</td></tr><tr><th>이벤트</th><td>결혼 2년 차, 임신 시도 3개월</td></tr><tr><th>환경</th><td>맞벌이 부부, 일정 조율이 어려움</td></tr><tr><th>데이터</th><td>배란일 앱으로 가임기 예측 · 생리 주기 26~34일</td></tr><tr><th>특이사항</th><td>배란 예정일에만 관계를 집중</td></tr><tr><th>환자 멘트</th><td>“이렇게까지 했는데 왜 임신이 안 될까요?”</td></tr></table><p class="memo-h">추가 상담 메모</p><ul class="memo"><li>배란일 앱이 지정한 날짜에 맞춰 임신 시도</li><li>배란 예정일에는 개인 약속을 취소할 정도로 일정을 조정</li><li>남편은 배란일이 다가올 때마다 심리적 부담을 느낌</li><li>3개월간 임신 소식이 없어 걱정 중</li></ul><p class="note">‘생리 주기 26~34일’은 3막에서 짚는 줄이에요. 원인을 찾는 반전이 아니라, 앱 날짜는 예상일 뿐이라는 걸 설명하는 단서예요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-chart">수정할 부분</label>
+      <textarea id="fb-ep1-chart" data-key="ep1-chart" data-section="chart" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-opening">
+  <header class="sec-hd"><span class="kicker">오프닝</span><h3>카메라를 보며</h3><span class="meta">약 20초 · 따로 찍어요</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">배란일 앱이 알려 준 하루에만 맞추고 계세요?</p><p class="line">임신을 준비할 때는 그날 하루보다, 그 전 며칠을 함께 보는 게 중요해요.</p><p class="line">오늘은 석 달째 준비 중인 가상 부부의 차트를 보면서, 부담은 줄이고 임신 가능성은 높이는 쪽으로 방법을 어떻게 바꿀지 같이 볼게요.</p><p class="note">영상 맨 처음이에요. 둘째 문장에서 이름표 “김세정 원장 · 에스엔유여성의원 대표원장”이 떠요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>그날 하루보다, 그 전 며칠까지 함께 보세요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-opening">수정할 부분</label>
+      <textarea id="fb-ep1-opening" data-key="ep1-opening" data-section="opening" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-n1">
+  <header class="sec-hd"><span class="kicker">차트 읽기</span><h3>이 부부의 석 달</h3><span class="meta">약 25초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line"><span class="act">(차트를 보며)</span> 이분들은 결혼 2년 차 맞벌이 부부예요.</p><p class="line">석 달째 임신을 준비하고 계신데, 배란일 앱이 알려 준 날에 맞추셨고, 그날은 약속까지 취소하셨대요.</p><p class="line">그런데 소식이 없으니 걱정이 되셨던 거죠.</p><p class="note">목소리 위로 이 부부의 그림이 나와요. 마지막 문장 뒤에 차트에서 고개를 들어 주세요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-n1">수정할 부분</label>
+      <textarea id="fb-ep1-n1" data-key="ep1-n1" data-section="n1" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-1act">
+  <header class="sec-hd"><span class="kicker">1막</span><h3>석 달, 그리고 먼저 확인할 것</h3><span class="meta">따뜻하게 · 약 55초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">세 달 동안 기다리셨으니 답답하실 수 있어요.</p><p class="line">다만 만 33세에 석 달 동안 임신이 안 됐다는 것만으로 난임이라고 단정하지는 않아요. 건강한 부부도 한 번에 되는 경우는 생각보다 많지 않고, 몇 달에 걸쳐 임신하는 경우가 많거든요. <span class="tag">원장님 경험&amp;팁</span></p><p class="line">다만 시도 방법이나 건강 상태에 따라 상담 시기는 달라질 수 있어요.</p><p class="line">그래서 기간과 상관없이, 먼저 상담을 받아 보시면 좋은 경우도 있어요.</p><p class="line">생리가 아주 불규칙하거나 몇 달씩 없을 때, 자궁내막증이나 난관 문제 같은 진단을 받은 적이 있을 때, 남편분 쪽에 걱정되는 게 있을 때, 그리고 관계 자체가 어려울 때요.</p><p class="line">이런 경우라면 기다리지 마시고요.</p><p class="line">이분 차트에는 이런 내용은 적혀 있지 않아서, 오늘은 임신 가능성을 높이는 시도 방법을 같이 볼게요.</p><p class="line"><span class="act">(차트의 ‘배란 예정일에만’ 줄을 펜으로 짚으며)</span> 그런데 저는 여기가 먼저 눈에 들어와요.</p><p class="note">‘먼저 상담받으면 좋은 경우’ 네 가지는 화면에 큰 자막으로 함께 나와요. 검사 기준(1년·6개월)은 5막에서 정리해요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>3개월만으로 난임이라고 단정하지 않아요. 다만 기다리지 말아야 할 경우는 따로 있어요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-1act">수정할 부분</label>
+      <textarea id="fb-ep1-1act" data-key="ep1-1act" data-section="1act" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-2act">
+  <header class="sec-hd"><span class="kicker">2막</span><h3>그날 하루, 그리고 그 전 며칠</h3><span class="meta">밝게 · 약 65초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">앱에서 “오늘이 배란 예정일이에요” 알림이 오면, 이분들은 그 하루에 맞추셨대요.</p><p class="line">그런데 임신이 될 수 있는 기간은 하루가 아니라, 배란일과 그 전 5일, 대략 6일 정도예요.</p><p class="line"><span class="act">(펜으로 차트 여백에 한 달 막대를 그리며)</span> 정자는 몸 안에서 며칠까지 버틸 수 있는데, 난자는 배란되고 나서 12시간에서 24시간 정도예요.</p><p class="line">그래서 배란 전에 정자가 미리 가서 기다리고 있는 쪽이 수정에 유리해요. 실제로 배란 전 이틀 정도가 임신 가능성이 가장 높은 때로 알려져 있어요.</p><p class="line">물론 배란 당일에도 임신은 될 수 있어요. 다만 그 하루만 노리면, 그 전에 있는 좋은 날들을 놓치기 쉬워요.</p><p class="line">그런데 여기서 말한 6일은 ‘실제 배란일’ 기준이에요. 앱에 찍힌 날이 실제 배란일이라는 보장은 없거든요.</p><p class="line">그럼 그 ‘그날’은 누가 정했죠? 앱이죠.</p><p class="note">원장님이 그린 막대가 그래픽 막대로 이어져요. 여기서는 원리만, 생활에 적용하는 법은 3막에서 말해요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>가임기는 실제 배란일까지 약 6일이에요. 그날 하루보다 그 전 며칠이 중요해요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-2act">수정할 부분</label>
+      <textarea id="fb-ep1-2act" data-key="ep1-2act" data-section="2act" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-3act">
+  <header class="sec-hd"><span class="kicker">3막</span><h3>앱 날짜는 ‘예상’이에요</h3><span class="meta">차분하게 · 약 90초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">앱은 지난 생리 날짜를 가지고 다음 배란일을 계산해서 알려 줘요.</p><p class="line">그래서 저는 이 부분을 꼭 확인해요. 생리 주기요.</p><p class="line"><span class="act">(차트의 ‘26~34일’에 펜으로 표시하며)</span> 이분은 26일에서 34일 사이로, 달마다 조금씩 달라요.</p><p class="line">앱은 이 기록으로 날짜를 ‘예상’하는 거라서, 주기가 달라지면 예상도 같이 흔들릴 수 있어요. 사실 주기가 규칙적인 분도 배란 시점은 달마다 조금씩 달라질 수 있고요.</p><p class="line">이 기록만으로 문제가 있다고 말할 수는 없어요.</p><p class="line">다만 앱이 알려 준 날을 실제 배란일로 확정해서 생각하지는 않으셨으면 해요. 앱은 ‘대략 이쯤’을 알려 주는 참고용이에요.</p><p class="line">그리고 이건 이분이 덜 노력해서 생긴 일이 아니에요.</p><p class="line">이분처럼 주기가 26일에서 34일 사이로 달라지면, 배란일도 달마다 일주일 넘게 왔다 갔다 할 수 있어요. <span class="tag">팩트 체크</span></p><p class="line">그래서 방법은 두 가지예요. 하나는 앱에 표시된 딱 하루만 보지 마시고, 주기 전체에 걸쳐 규칙적으로 관계하시는 거예요. 일주일에 두세 번 정도면 좋은 날을 놓치지 않아요.</p><p class="line">다른 하나는, 날짜를 좀 더 알고 싶으시면 배란테스트기를 써 보시는 거예요. 앱이 지난 기록으로 계산한다면, 테스트기는 소변으로 몸이 보내는 신호를 보는 거라 관계 시기를 잡는 데 도움이 될 수 있어요.</p><p class="line">쓰신다면 양성이 나온 날과 그다음 날이 좋은 때예요. 배란이 하루이틀 안으로 가까워졌다는 뜻이거든요.</p><p class="line">다만 양성이 나왔다고 정확한 배란 시각을 알려 주는 건 아니고요, 꼭 해야 하는 숙제도 아니에요. 두 분에게 편한 쪽을 고르시면 돼요.</p><p class="note">‘26~34일’은 원인을 찾아내는 반전이 아니라, 앱 날짜를 확정으로 보지 않게 하는 단서예요. 차분히 짚고 넘어가 주세요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>앱 날짜는 예상이에요. 주기 전체에 규칙적으로 가거나, 날짜가 궁금하면 테스트기로 몸의 신호를 보세요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-3act">수정할 부분</label>
+      <textarea id="fb-ep1-3act" data-key="ep1-3act" data-section="3act" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-4act">
+  <header class="sec-hd"><span class="kicker">4막</span><h3>다음 달에 바꿔 볼 방법</h3><span class="meta">밝게 · 약 70초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">메모를 보면 남편분은 배란일이 다가올수록 부담을 느끼셨고, 그날을 비우려고 약속까지 취소하셨대요.</p><p class="line">날짜가 정해지면 그날은 ‘해야 하는 날’이 되잖아요. 이런 부담, 생각보다 많은 부부가 이야기하세요. <span class="tag">원장님 경험&amp;팁</span></p><p class="line">그래서 다음 달에는 방법을 조금 바꿔 보시면 좋겠어요.</p><p class="line">가임기에는 하루 이틀 간격으로 관계를 가지시면 좋아요. 꼭 매일 하실 필요는 없고요. 뭐, 두 분이 힘이 되신다면 매일 하셔도 괜찮습니다.</p><p class="line"><span class="act">(말을 마친 뒤 짧게 여백)</span></p><p class="pd">PD: 그럼 임신 준비 전에 체력부터 길러 놔야겠는데요?</p><p class="line">아니, 그렇게까지 하시라는 건 아니고요! <span class="act">(웃음)</span> 두 분이 부담 없는 게 더 중요하죠.</p><p class="line"><span class="act">(다시 본론으로)</span> 이 부부도 지금 날짜에 너무 얽매이고 있잖아요. 그러니까 저는 약속까지 취소하지는 마시라고 말씀드리고 싶어요.</p><p class="line"><span class="act">(펜으로 ‘약속 취소’에 줄을 그으며)</span> 가임기는 하루가 아니라 며칠이니까요.</p><p class="note">‘매일 하셔도 괜찮습니다’ 뒤에는 짧게 틈을 두셔도 좋아요. 화면에 맞벌이 부부의 ‘매일’이 그림으로 지나가요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>꼭 매일이 아니어도 돼요. 두 분에게 부담 없는 리듬이면 돼요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-4act">수정할 부분</label>
+      <textarea id="fb-ep1-4act" data-key="ep1-4act" data-section="4act" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-5act">
+  <header class="sec-hd"><span class="kicker">5막</span><h3>‘이렇게까지’와 기본 답</h3><span class="meta">따뜻하게 · 약 55초</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">그리고 이분이 진료실에서 이렇게 물으셨대요. “이렇게까지 했는데, 왜 임신이 안 될까요?”</p><p class="line"><span class="act">(잠깐 멈추고)</span> 저는 이 말이 좀 마음에 걸려요. 이미 충분히 애쓰고 계신 거거든요.</p><p class="line">오늘 바꿀 건 노력의 양보다 방법이에요. 예상 날짜 하루에 모든 걸 걸지 않으셔도 돼요.</p><p class="line">정리하면 이 부부의 다음 달은 이렇게요. 앱에 찍힌 하루만 보지 말고 주기 전체에 규칙적으로. 날짜가 궁금하면 배란테스트기는 선택으로. 그리고 약속은 지키면서요.</p><p class="line">기준도 말씀드릴게요. 만 35세 미만이면 1년, 만 35세 이상이면 6개월 동안 이렇게 시도해 보고도 소식이 없을 때는 검사를 받아 보세요.</p><p class="line">그 전이라도 아까 말씀드린 경우라면 기다리지 마시고요.</p><p class="note">‘이 부부의 다음 달’ 세 가지가 체크 카드로, 이어서 검사 기준이 자막으로 나와요.</p><p class="key"><span>꼭 전해 주실 한 줄</span>오늘 바꿀 건 노력의 양보다 방법이에요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-5act">수정할 부분</label>
+      <textarea id="fb-ep1-5act" data-key="ep1-5act" data-section="5act" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-tip">
+  <header class="sec-hd"><span class="kicker">끝 카드</span><h3>이번 주 세정's 팁</h3><span class="meta">카메라를 보며 한마디</span></header>
+  <p class="line">촬영 때 하실 한마디를 하나 골라 주세요. 마음에 드는 게 없으면 ‘직접 작성하기’를 골라 원장님 말로 적어 주시면 돼요. 고르신 말이 영상 아래 카드로 나가요.</p>
+  <fieldset class="choices"><legend>세정's 팁 문장 고르기</legend>
+    <label class="choice" for="tip-0"><input type="radio" name="tip" id="tip-0" value="0"><span>“배란일 하루에 올인하지 마세요. 가임기는 약 6일이고, 그중 배란 전 이틀이 가장 좋아요.”</span></label><label class="choice" for="tip-1"><input type="radio" name="tip" id="tip-1" value="1"><span>“날짜보다 리듬이에요. 가임기엔 하루 이틀 간격, 날짜를 모르겠으면 일주일에 두세 번이면 충분해요.”</span></label><label class="choice" for="tip-2"><input type="radio" name="tip" id="tip-2" value="2"><span>“앱 날짜는 예상일이에요. 하루만 보지 마시고, 날짜가 궁금하면 배란테스트기로 몸의 신호를 보세요.”</span></label><label class="choice" for="tip-3"><input type="radio" name="tip" id="tip-3" value="3"><span>“꼭 매일이 아니어도 괜찮아요. 가임기엔 하루 이틀 간격이면 충분해요.”</span></label>
+    <label class="choice" for="tip-custom"><input type="radio" name="tip" id="tip-custom" value="custom"><span><b>직접 작성하기</b></span></label>
+    <textarea id="tip-text" rows="3" placeholder="원장님이 하실 한마디를 적어 주세요." hidden></textarea>
+  </fieldset>
+  <p class="pd" style="margin-top:14px">PD (다음 주 예고): 그런데 35세부터는 기다리는 방법도 달라지나요?</p>
+  <p class="note">원장님은 웃으며 “그건 다음 주에 이야기해요.” 정도로 짧게 받아 주시면 돼요.</p>
+</section><section class="sec" id="s-pdq">
+  <header class="sec-hd"><span class="kicker">현장</span><h3>PD가 여쭤볼 수 있는 질문</h3><span class="meta">현장 상황에 따라 빠질 수 있어요</span></header>
+  <div class="sec-body">
+    <div class="script"><ul class="list"><li>“원장님, 진료실에서 이런 식으로 배란일 때문에 지나치게 노력하는 부부를 실제로 보시면 어떤 생각부터 드세요?”</li><li>“가임기에 매일 해도 된다고 하셨는데, 정말 매일 하겠다는 부부가 있다면 뭐라고 말씀하시겠어요?”</li><li>“원장님은 운동 좋아하시잖아요. 임신 준비하는 부부에게도 운동을 권한다면 어떤 걸 추천하시겠어요?”</li></ul></div>
+    <div class="fb">
+      <label for="fb-ep1-pdq">수정할 부분</label>
+      <textarea id="fb-ep1-pdq" data-key="ep1-pdq" data-section="pdq" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-check">
+  <header class="sec-hd"><span class="kicker">확인 부탁</span><h3>원장님 경험&amp;팁 · 팩트 체크</h3><span class="meta">촬영 전에 봐 주세요</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="memo-h">원장님 경험&amp;팁 (실제로 보시는 일과 맞는지)</p><ul class="list"><li><b>1막</b> “몇 달에 걸쳐 임신하는 경우가 많거든요.”</li><li><b>4막</b> “이런 부담, 생각보다 많은 부부가 이야기하세요.”</li></ul><p class="memo-h">팩트 체크 (의학적으로 맞는지)</p><ul class="list"><li><b>3막</b> ‘26~34일이면 배란일도 달마다 일주일 넘게 달라질 수 있다’는 설명이 맞는지(다음 생리 약 14일 전 배란이라는 계산으로 추정한 거예요). 그리고 26~34일 주기를 ‘규칙적인 범위’로 보시는지. 1막의 ‘생리가 아주 불규칙하면 먼저 상담’과 어긋나지 않게 말씀하실 수 있도록요.</li><li><b>오프닝</b> 이름표에 전문분야(예: ‘산부인과 전문의’)를 함께 넣어도 되는지. 지금은 ‘에스엔유여성의원 대표원장’만 넣었어요.</li></ul></div>
+    <div class="fb">
+      <label for="fb-ep1-check">수정할 부분</label>
+      <textarea id="fb-ep1-check" data-key="ep1-check" data-section="check" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section><section class="sec" id="s-overall">
+  <header class="sec-hd"><span class="kicker">전체</span><h3>전체 의견</h3><span class="meta">자유롭게</span></header>
+  <div class="sec-body">
+    <div class="script"><p class="line">제목, 분위기, 길이, 전체 흐름처럼 막을 넘는 의견을 적어 주세요.</p></div>
+    <div class="fb">
+      <label for="fb-ep1-overall">수정할 부분</label>
+      <textarea id="fb-ep1-overall" data-key="ep1-overall" data-section="overall" rows="5" placeholder="고칠 말, 빼고 싶은 문장, 원장님 말투로 바꾼 표현 등을 적어 주세요. 없으면 비워 두셔도 돼요."></textarea>
+    </div>
+  </div>
+</section>
+    <section class="done" id="s-save">
+      <p class="done-t">다 보셨나요?</p>
+      <p class="done-d">적어 주신 수정사항과 고르신 세정's 팁을 한 번에 저장해요. 저장한 뒤에도 고쳐서 다시 저장하실 수 있어요.</p>
+      <button type="button" class="save-all" id="save-all"><span class="lbl">수정사항 저장하기</span></button>
+      <p class="saved-msg" id="saved-msg" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+</div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbxfRlzuhHHnee2iJ8PZktf9dA-MKz68Wo8Dto-2SMKIE8hYzU_86lTTjzar-uhrEjwn/exec";
+const EP = "ep1";
+const SECTIONS = ["chart", "opening", "n1", "1act", "2act", "3act", "4act", "5act", "tip", "pdq", "check", "overall"];
+const TIPS = ["배란일 하루에 올인하지 마세요. 가임기는 약 6일이고, 그중 배란 전 이틀이 가장 좋아요.", "날짜보다 리듬이에요. 가임기엔 하루 이틀 간격, 날짜를 모르겠으면 일주일에 두세 번이면 충분해요.", "앱 날짜는 예상일이에요. 하루만 보지 마시고, 날짜가 궁금하면 배란테스트기로 몸의 신호를 보세요.", "꼭 매일이 아니어도 괜찮아요. 가임기엔 하루 이틀 간격이면 충분해요."];
+const saved = {};
+
+function $(s, r) { return (r || document).querySelector(s); }
+function draftKey(sid) { return "imjunsil-draft-" + EP + "-" + sid; }
+function readDraft(sid) { try { return localStorage.getItem(draftKey(sid)); } catch (e) { return null; } }
+function writeDraft(sid, v) { try { v ? localStorage.setItem(draftKey(sid), v) : localStorage.removeItem(draftKey(sid)); } catch (e) {} }
+function fmt(iso) {
+  const d = new Date(iso); if (isNaN(d)) return "";
+  return (d.getMonth() + 1) + "월 " + d.getDate() + "일 " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+}
+function notice(text) {
+  for (const id of ["notice-home", "notice-ep"]) { const n = document.getElementById(id); n.textContent = text; n.hidden = !text; }
+}
+function hasText(sid) { return !!(saved[sid] && String(saved[sid].text || "").trim()); }
+function refreshCounts() {
+  const n = SECTIONS.filter(hasText).length;
+  document.getElementById("ep1-count").textContent = n ? "수정사항 " + n + "곳 저장됨" : "검토 전";
+  for (const sid of SECTIONS) { const a = $('.toc a[data-jump="s-' + sid + '"]'); if (a) a.classList.toggle("has", hasText(sid)); }
+}
+
+function route() {
+  const ep = location.hash === "#ep1";
+  document.getElementById("v-home").hidden = ep;
+  document.getElementById("v-ep1").hidden = !ep;
+  if (ep) window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+document.addEventListener("click", e => {
+  const j = e.target.closest("[data-jump]"); if (!j) return;
+  e.preventDefault();
+  const t = document.getElementById(j.dataset.jump); if (t) t.scrollIntoView({ block: "start" });
+});
+
+function tipValue() {
+  const r = $('input[name="tip"]:checked'); if (!r) return null;
+  if (r.value === "custom") return { choice: "custom", text: $("#tip-text").value };
+  return { choice: r.value, text: TIPS[Number(r.value)] };
+}
+function showTip(v) {
+  if (!v || v.choice == null) return;
+  const r = document.getElementById(v.choice === "custom" ? "tip-custom" : "tip-" + v.choice); if (r) r.checked = true;
+  $("#tip-text").hidden = v.choice !== "custom";
+  if (v.choice === "custom") $("#tip-text").value = v.text || "";
+}
+
+const btn = document.getElementById("save-all");
+const msg = document.getElementById("saved-msg");
+function label(t) { btn.querySelector(".lbl").textContent = t; }
+function say(t, err) { msg.textContent = t; msg.className = "saved-msg" + (err ? " err" : ""); void msg.offsetWidth; if (t) msg.classList.add("show"); }
+function unsaved() { if (btn.classList.contains("ok")) { btn.classList.remove("ok"); label("수정사항 저장하기"); say("저장하지 않은 수정사항이 있어요"); } }
+
+document.addEventListener("change", e => {
+  if (e.target.name !== "tip") return;
+  const custom = e.target.value === "custom";
+  $("#tip-text").hidden = !custom;
+  if (custom) $("#tip-text").focus();
+  const v = tipValue(); try { if (v) localStorage.setItem(draftKey("tip"), JSON.stringify(v)); } catch (err) {}
+  unsaved();
+});
+document.addEventListener("input", e => {
+  if (e.target.id === "tip-text") { const v = tipValue(); try { if (v) localStorage.setItem(draftKey("tip"), JSON.stringify(v)); } catch (err) {} unsaved(); return; }
+  const ta = e.target.closest("textarea[data-section]"); if (!ta) return;
+  writeDraft(ta.dataset.section, ta.value);  // 저장 전까지 이 기기에 임시 보관
+  unsaved();
+});
+
+function pending() {
+  const out = [];
+  for (const sid of SECTIONS) {
+    if (sid === "tip") {
+      const v = tipValue();
+      if (!v || (v.choice === "custom" && !v.text.trim())) continue;
+      const s = saved.tip;
+      if (s && String(s.choice) === String(v.choice) && (s.text || "") === v.text) continue;
+      out.push({ section: "tip", text: v.text, choice: v.choice });
+    } else {
+      const ta = $('textarea[data-section="' + sid + '"]'); if (!ta) continue;
+      if ((saved[sid] && saved[sid].text || "") === ta.value) continue;
+      out.push({ section: sid, text: ta.value });
+    }
+  }
+  return out;
+}
+
+btn.addEventListener("click", async () => {
+  if (!API) { say("저장 기능이 아직 연결되지 않았어요. 제작진에게 알려 주세요.", true); return; }
+  const items = pending();
+  if (!items.length) { btn.classList.add("ok"); label("저장되었습니다"); say("저장되었습니다 · 바뀐 내용은 없어요"); return; }
+  btn.disabled = true; btn.classList.remove("ok"); btn.classList.add("busy"); label("저장하는 중"); say("");
+  try {
+    const r = await fetch(API, { method: "POST", body: JSON.stringify({ ep: EP, items }) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "save_failed");
+    for (const it of items) { saved[it.section] = Object.assign({}, it, { updatedAt: j.savedAt }); writeDraft(it.section, ""); }
+    btn.classList.add("ok"); label("저장되었습니다");
+    say("저장되었습니다 · " + fmt(j.savedAt) + " · " + items.length + "곳");
+  } catch (err) {
+    label("다시 저장하기");
+    say("저장하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요. 적은 내용은 이 기기에 남아 있어요.", true);
+  } finally {
+    btn.classList.remove("busy"); btn.disabled = false; refreshCounts();
+  }
+});
+
+async function start() {
+  route();
+  try { const d = readDraft("tip"); if (d) showTip(JSON.parse(d)); } catch (e) {}
+  for (const sid of SECTIONS) { if (sid === "tip") continue; const d = readDraft(sid); if (d) { const ta = $('textarea[data-section="' + sid + '"]'); if (ta) ta.value = d; } }
+  if (!API) { notice("저장 기능이 아직 연결되지 않았어요. 적은 내용은 이 기기에만 임시로 남아요."); return; }
+  try {
+    const r = await fetch(API + "?ep=" + EP);
+    const j = await r.json();
+    for (const it of (j.items || [])) {
+      saved[it.section] = it;
+      if (it.section === "tip") { if (!readDraft("tip")) showTip(it); }
+      else { const ta = $('textarea[data-section="' + it.section + '"]'); if (ta && !readDraft(it.section)) ta.value = it.text || ""; }
+    }
+    refreshCounts();
+  } catch (e) {
+    notice("저장된 내용을 불러오지 못했어요. 인터넷 연결을 확인해 주세요. 새로 적고 저장하는 건 할 수 있어요.");
+  }
+}
+start();
+</script>
+
+</body>
+</html>
